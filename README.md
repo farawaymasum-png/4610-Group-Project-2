@@ -1,7 +1,5 @@
 # 4610-Group-Project-2
 
-# Group Project 2
-
 Team Members: 
 
 Evelyn Merchant: add user and fork link 
