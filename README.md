@@ -3,7 +3,7 @@
 Team Members: 
 
 Evelyn Merchant: @evelynjmerch
-
+Divesh Gupta: @legendile7
 
 
 ## Dataset Description
@@ -70,4 +70,22 @@ Peru dramatically leads the fatality rate chart at 5.48%, meaning roughly 1 in e
 Together these two charts expose a fundamental tension in pandemic measurement: the countries that died the most are not the same as the countries where infection was most deadly. France had over 161,000 deaths but had such widespread confirmed case detection that its fatality rate was negligible by comparison. Peru, on the other hand, had far fewer recorded cases, yet its death toll relative to those cases was the highest of any country in the top 10. This shows that Peru was a strong signal of either overwhelmed healthcare infrastructure, significant undercounting of confirmed cases during the outbreak, or both. Brazil is the only country that ranks highly on both charts, appearing 2nd in total deaths and 2nd in CFR at 2.77%, making it the clearest example of a country that experienced both high outbreak volume and high outbreak severity simultaneously.
 
 ## Streamlit App
+Our Streamlit dashboard takes the Snowflake queries and wraps them in a fully interactive, custom-styled "Dark Mode" web application.
+
+**Interactive Element 1: U.S. State Multi-Select Filter**
+* **Functionality:** Users can select one or multiple U.S. states from a dropdown menu to dynamically update the dual-axis line chart tracking the Winter 2020-2021 surge.
+* **Analytical Value:** The COVID-19 winter surge did not hit all states simultaneously or with the same severity. By allowing users to filter by specific states, the dashboard enables comparative analysis of regional hospital capacity and localized outbreak timelines, rather than just viewing a blurred national average.
+
+**Interactive Element 2: Minimum Confirmed Cases Threshold Slider**
+* **Functionality:** Users can adjust a numerical input to set a floor for the minimum number of confirmed cases a country must have to be included in the Global Case Fatality calculation.
+* **Analytical Value:** Death rates (fatalities / cases) can be highly skewed by statistical anomalies in countries with tiny populations or limited reporting (e.g., a country with 10 cases and 2 deaths having a 20% fatality rate). By giving the user control over the case threshold, they can filter out statistical noise and focus the analysis on nations experiencing statistically significant, widespread outbreaks.
+
+**AI Assistance Documentation:**
+We utilized AI (Gemini) to assist with the technical execution of our dashboard in the following ways:
+1. **Python Translation:** Translated our working Snowflake SQL queries into Python syntax.
+2. **Advanced Visualization (Dual-Axis):** Overcame a limitation of standard Snowsight visualizations. Because the volume of new cases vastly outnumbered available ventilators, plotting them on the same axis flattened the hospital data. We prompted the AI to use the `altair` library to generate a dual-axis chart (`resolve_scale(y='independent')`).
+
+<img width="1795" height="928" alt="image" src="https://github.com/user-attachments/assets/90e0c39e-9b02-40d5-ad61-d79874156a6e" />
+<img width="1765" height="947" alt="image" src="https://github.com/user-attachments/assets/272982c6-5bb6-4579-a855-f819998bcd66" />
+
 
