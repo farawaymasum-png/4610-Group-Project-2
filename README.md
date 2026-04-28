@@ -5,6 +5,7 @@ Team Members:
 - Evelyn Merchant: @evelynjmerch
 - Divesh Gupta: @legendile7
 - Faraaz Masum: @farawaymasum-png
+- Vanessa Wang: @vanwangg
 
 
 ## Dataset Description
@@ -43,6 +44,11 @@ JHU_COVID_19
 	CASES: The numeric count column — the actual number of cases for a given country, date, and case type. Used to calculate TOTAL_CONFIRMED,       TOTAL_DEATHS, and DEATH_RATE_PCT.
 
 ## Data Manipulations
+Query 1: 
+In order to analyze the relationship between hospital strain and community spread, we used joins and filtering. We used an inner join between the New York Times and the COVID tracking project tables. The composite key of State/Province_State and DATE was used to make sure that when cases spiked, the hospital resources would show these spikes daily. We used filtering to isolate the Winter Surge period: 2020-10-01 to 2021-03-01, since this was the time when the US healthcare system was most stressed out by COVID cases. We used CASES_SINCE_PREV_DAY to show surges in communities as well. We also used a ratio (VENTILATOR_PERCENT_OF_TOTAL_CASES), which represented the resource demand for ventilators (Current ventilator patient / total cases). We also added NULLIF(nyt.CASES, 0), which avoids dividing by zero, so there are no errors. 
+
+Query 2: 
+For the Global Fatality Analysis, we had to transform the 'Long Format' data provided into 'Wide Format' data to be compare and analyze the data effectively. We used aggregation as Confirmed, and Deaths were stored in the same Column, so CASE WHEN statements were used with MAX() to move these into adjacent columns (TOTAL_CONFIRMED and TOTAL_DEATHS). Since the data also had multiple countries that have subregions, the data was aggregated at the PROVINCE_STATE level first in an inner query before the final group by COUNTRY_REGION. We also used a calculated ratio to find the Case Fatality Rate as a percentage: Death rate percentage = (total deaths / total confirmed) * 100. We used a filter to exclude outliers so that the death rate would not be skewed: HAVING TOTAL_CONFIRMED > 100000. Lastly, we ordered the final result by TOTAL_DEATHS DESC so we could see the top 10 countries with the highest death rate, which we then used for our visualization. 
 ## Analysis and Results
 1.
 <img width="1211" height="386" alt="Screenshot 2026-04-26 at 5 03 02 PM" src="https://github.com/user-attachments/assets/580542bf-331a-491c-8945-b3569930fc70" />
